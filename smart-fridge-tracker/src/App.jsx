@@ -4,6 +4,8 @@ import FridgeList from './components/FridgeList';
 import ExpiringPanel from './components/ExpiringPanel';
 import RecipeSuggestions from './components/RecipeSuggestions';
 import CategoryShelfLifeEditor from './components/CategoryShelfLifeEditor';
+import StatsDashboard from './components/StatsDashboard';   // ✅ 新增：引入仪表盘
+
 import './App.css';
 
 export default function App() {
@@ -52,11 +54,19 @@ export default function App() {
       {/* main list */}
       <FridgeList items={items} onRemove={handleRemove} onUpdate={handleUpdate} />
 
+      {/* ✅ 新增：可视化仪表盘（构成 + 浪费率趋势） */}
+      <StatsDashboard items={items} />
+
       <footer>
         Data source: Open Food Facts + TheMealDB (for educational use)
-        {/* 可选：顺手显示一下数量，方便验证 */}
-        { ' · Recipes found: ' }{recipeCount}
+        {' · Recipes found: '}{recipeCount}
       </footer>
     </div>
   );
+
+
+
+
+  
 }
+

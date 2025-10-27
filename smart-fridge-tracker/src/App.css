@@ -40,3 +40,50 @@
 .read-the-docs {
   color: #888;
 }
+
+/* ---- Reset weird global flex and ensure normal flow ---- */
+html, body, #root { min-height: 100%; }
+body {
+  margin: 0;
+  display: block;           /* override any global display:flex */
+  background: #f7f7fa;
+  color: #223;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+/* ---- App container ---- */
+.app {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;  /* bottom space for footer */
+}
+
+/* ---- Generic section/card styling ---- */
+.section {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  padding: 16px;
+  margin: 24px 0;           /* vertical spacing between blocks */
+}
+
+/* ---- Chart cards ---- */
+.chart {
+  height: 320px;            /* give charts ample vertical room */
+}
+.chart-title {
+  margin: 0 0 12px;
+  text-align: center;
+}
+
+/* keep chart internals visible, avoid clipping */
+.recharts-wrapper { overflow: visible; }
+
+/* footer never overlaps */
+footer {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid #eaeaea;
+  position: static;
+}
+

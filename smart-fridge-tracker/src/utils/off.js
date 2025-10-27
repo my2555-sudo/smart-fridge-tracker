@@ -103,12 +103,26 @@ export async function fetchOffByName(query, opts = {}) {
   const baseCat = mapOffToCategory(tags);
   const days = estimateShelfLifeDays({ baseCat, tags, ...opts });
 
-  return {
-    name: p.product_name || query,
-    category: baseCat || 'unknown',
-    expiryISO: addDaysISO(days),
-    nova: p.nova_group || null,
-    nutri: p.nutriscore_grade || null,
-    source: 'off'
+  // helper (top of file, once)
+const toTitleCase = s =>
+  String(s ?? '')
+    .trim()
+    .replace(/\s+/g, ' ')
+    .toLowerCase()
+    .replace(/\b\w/g, c => c.toUpperCase());
+
+return {
+  // ✅ Always use what the user typed (Name mode)
+  name: toTitleCase(query),
+
+  // (optional) keep OFF’s product title as metadata for later use/display
+  offTitle: p.product_name_en || p.product_name || null,
+
+  category: baseCat || 'unknown',
+  expiryISO: addDaysISO(days),
+  nova: p.nova_group ?? null,
+  nutri: p.nutriscore_grade ?? null,
+  source: 'off'
   };
+
 }
